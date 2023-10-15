@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>🫢🫢🫢🫢🫢</title>
+  </head>
+
+  <body>
+    <h1>Ayy</h1>
+    <script>
+      const emoji = '😊🙃🤪🤓🫢🤯😴💩👻👽🤖👾👐🖖🤟🤘🤙👋🐭🦕🦖🐉'
+      const e = () => [...emoji][Math.floor(Math.random() * emoji.length)]
+      setInterval(() => {
+        document.title = `${Array(5).map(_ => e()).toString()}`
+      }, 10000);
+    </script>
+  </body>
+</html>
