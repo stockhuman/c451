@@ -3,17 +3,151 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <title>🫢🫢🫢🫢🫢</title>
+    <style>
+      * {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      body {
+        background-color: rgb(242, 252, 244);
+        color: #282727;
+        margin: 0;
+      }
+      header {
+        background: #dfe8e5;
+        padding: 2rem;
+        text-align: center;
+      }
+      footer {
+        text-align: center;
+        font-size: smaller;
+      }
+      main {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      article {
+        max-width: 750px;
+        padding: 2rem;
+      }
+      .amtlib {
+        background: url("./amtlib.gif");
+        color: #1f8065;
+      }
+      .amtlib * {
+        font-family: monospace;
+      }
+      .amtlib header {
+        background: rgba(116, 56, 237, 0.492);
+        color: white;
+      }
+    </style>
   </head>
 
   <body>
-    <h1>Ayy</h1>
+    <audio hidden id="keygen" loop autoplay muted>
+      <source src="disturbed.mp3" type="audio/mpeg" />
+      darn
+    </audio>
+    <header>
+      <h1>Hehehemingway</h1>
+      <button onclick="moreRAM()" id="b">
+        Windows_7_COD_MW2-warez.CRACKED-ELITH1N1A.exe
+      </button>
+    </header>
+    <main>
+      <article>
+        <h2>Eyeo 2015 // Robotic Poetry</h2>
+        <p>
+          I'm generally ambivalent to robo-gibberish; in a way it's the default,
+          the easiest thing you can get a machine to spit out. All the same,
+          when it comes to the creative, LLMs these days seem to have either
+          been over-trained or are genuinely incapable of minting something
+          creatively new (despite being themselves entirely new tech).
+        </p>
+        <p>
+          Even with the most explicit coaxing, OpenAI's monster will only
+          generate rather bland, trite passages and
+          <i>will absolutely</i> fixate on the request for "poetry." This
+          produces embarrasingly infantile texts that resemble the stereotype of
+          the word with zero substance. To its detriment, it is also never
+          pretty.
+        </p>
+        <p>
+          So, then, I can see the artistic appeal of randomness or the
+          sponataneity of a well-selected corpus of words to run Markov chains
+          on. "AI," be it <code>if</code> statements or black-box, is however
+          still a tool. To a great degree I've found that it is too easy to
+          merely present the tool itself instead of meaningfully executing a
+          vision through it.
+        </p>
+        <p>
+          I know I myself am guilty of this
+          <a href="https://botsin.space/@heraldry">as well</a>, using randomness
+          in place of merely trying out options myself. The amusement comes,
+          like it does in Allison's work, from the serendipity of the odd
+          amusing combination.
+        </p>
+        <p>
+          Is that a good thing? Is that art? Maybe. Though, as the human agency
+          in art diminishes - so does its value, as far as I can tell. ~
+        </p>
+      </article>
+    </main>
+    <footer>
+      <a href="https://michaelhemingway.com/">Do not @ me</a><br />
+      <p id="size"></p>
+    </footer>
     <script>
-      const emoji = '😊🙃🤪🤓🫢🤯😴💩👻👽🤖👾👐🖖🤟🤘🤙👋🐭🦕🦖🐉'
-      const e = () => [...emoji][Math.floor(Math.random() * emoji.length)]
+      const emoji = "😊🙃🤪🤓🫢🤯😴💩👻👽🤖👾👐🖖🤟🤘🤙👋🐭🦕🦖🐉";
+      const e = () => [...emoji][Math.floor(Math.random() * 22)];
       setInterval(() => {
-        document.title = `${Array(5).map(_ => e()).toString()}`
+        document.title = `${Array(5).fill(e()).join("")}`;
       }, 10000);
+      document.getElementById("size").innerHTML = `~${Math.ceil(
+        document.documentElement.outerHTML.length / 1024 + 1700
+      )} kB wasted viewing this page`;
+    </script>
+    <script>
+      const rand = (arr) => arr[Math.floor(Math.random() * arr.length)];
+      function moreRAM() {
+        const str = [
+          "WindowsXP-HomeEdition",
+          "JTAG[XBOX360]%20slim",
+          "3DsMax-",
+          "Maya2008_AutoDesk",
+          "AutoDesk_AUTOCAD2009",
+          "HALO-CombatEvolved-PC",
+          "Windows_7",
+          "COD-MW2.final_",
+          "PATCHED_noskill_343",
+          "Adobe%20Creative%20Suite%20CS3%20Complete",
+        ];
+        const pers = [
+          "3RNA",
+          "RARBG",
+          "3DM",
+          "CODEX",
+          "DEViANCE",
+          "EVO",
+          "Phrozen_Crew",
+        ];
+        const mid = ["warez", "free", "patched", "OSX", "torrentfreak"];
+        const file = ["exe", "rar", "bzip", "gzip.txt", "bat.mp3"];
+        const keygen = document.getElementById("keygen");
+        const b = document.getElementById("b");
+        if (keygen.muted) {
+          keygen.muted = false;
+          b.innerText = "oh shit stop";
+          document.getElementsByTagName("body")[0].className = "amtlib";
+        } else {
+          keygen.muted = true;
+          b.innerText = `${rand(str)}_${rand(pers)}.${rand(mid)}.${rand(file)}`;
+          document.getElementsByTagName("body")[0].className = "";
+        }
+      }
     </script>
   </body>
+  <!-- Hand-crafted, farm-to-server HTML, just for you -->
 </html>
