@@ -3,7 +3,7 @@
   import { OrbitControls, interactivity } from '@threlte/extras'
   import { spring } from 'svelte/motion'
 
-  import { builder } from './builder'
+  import { builder } from '../../functions/builder'
 
   const geo = builder()
 
