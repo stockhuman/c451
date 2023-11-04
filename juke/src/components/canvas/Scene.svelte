@@ -1,20 +1,33 @@
 <script>
   import { T, useFrame } from '@threlte/core'
-  import { OrbitControls, interactivity } from '@threlte/extras'
+  import { Environment, OrbitControls, interactivity, useGltf } from '@threlte/extras'
   import { spring } from 'svelte/motion'
-
+  import { MeshStandardMaterial } from 'three/src/materials/MeshStandardMaterial.js'
   import { builder } from '../../functions/builder'
+  import blankDisc from '../../assets/blank-disc.glb'
+  import envmap from '../../assets/empty_workshop_1k.hdr'
 
-  const geo = builder()
+  // recolor the disc
+  const mat = new MeshStandardMaterial({ color: 0xad0d10, roughness: 0.5 })
+  const mat2 = new MeshStandardMaterial({ color: 0xf44d40, roughness: 0.3 })
+  const blank = useGltf(blankDisc)
+  $: if ($blank) {
+    // @ts-ignore
+    $blank.scene.traverse(o => {
+      if (o.isMesh) o.material = mat
+    })
+  }
+  const pattern = builder()
 
   interactivity()
   const scale = spring(1)
   let rotation = 0
-  useFrame((state, delta) => {
-    rotation += delta
-  })
+  // useFrame((_, delta) => {
+  //   rotation += delta / 2
+  // })
 </script>
 
+<Environment files={envmap} format="hdr" />
 <T.PerspectiveCamera
   makeDefault
   position={[10, 10, 10]}
@@ -23,21 +36,18 @@
   }}>
   <OrbitControls enableDamping />
 </T.PerspectiveCamera>
-
-<T.DirectionalLight position={[0, 10, 10]} castShadow />
-
-<T.Mesh
-  rotation.y={rotation}
-  position={[0, 1.5, 0]}
-  scale={$scale}
-  on:pointerenter={() => scale.set(1.5)}
-  on:pointerleave={() => scale.set(1)}
-  castShadow
-  geometry={geo}>
-  <T.MeshStandardMaterial color="blue" />
-</T.Mesh>
-
-<T.Mesh rotation.x={-Math.PI / 2} receiveShadow>
-  <T.CircleGeometry args={[6, 40]} />
-  <T.MeshStandardMaterial color="white" />
-</T.Mesh>
+{#if $blank}
+  <T.Group
+    rotation.y={rotation}
+    position={[0, 1.5, 0]}
+    scale={$scale}
+    on:pointerenter={() => scale.set(1.5)}
+    on:pointerleave={() => scale.set(1)}>
+    <T.Mesh>
+      <T is={$blank.nodes['Scene']} scale={100} />
+    </T.Mesh>
+    {#await pattern then pat}
+      <T.Mesh geometry={pat} material={mat2} />
+    {/await}
+  </T.Group>
+{/if}

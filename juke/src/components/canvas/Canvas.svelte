@@ -3,7 +3,7 @@
   import Scene from './Scene.svelte'
 </script>
 
-<div>
+<div aria-details="A spinning disc representation of what will be downloaded as a 3d file">
   <Canvas>
     <Scene />
   </Canvas>
