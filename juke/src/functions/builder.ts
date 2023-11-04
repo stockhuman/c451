@@ -20,7 +20,7 @@ type DataPoint = {}
  * Builds A record given a set of note positions
  */
 export async function builder(sideA?: RecordSide, sideB?: RecordSide): Promise<BufferGeometry> {
-  const titleA = generateTitle(sideA?.title.toUpperCase() || '1234567890OD')
+  const titleA = generateTitle(sideA?.title.toUpperCase() || '1234567 890OD')
 
   const geometry = BufferGeometryUtils.mergeGeometries([titleA])
   return geometry
@@ -57,6 +57,7 @@ function generateTitle(title: string): BufferGeometry {
   const radius = 1.45
 
   for (let i = 0; i < title.length; i++) {
+    if (title[i] === ' ') continue
     const letter = new TextGeometry(title[i], {
       font: font,
       size: 0.3,
