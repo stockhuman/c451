@@ -62,8 +62,8 @@ export class STLExporter {
         }
 
         const index = geometry.index
-        if (!index) return
-        const positionAttribute = geometry.getAttribute('position')
+        const positionAttribute = geometry.getAttribute('position') || null
+        if (!positionAttribute) return
 
         this.triangles += index !== null ? index.count / 3 : positionAttribute.count / 3
 

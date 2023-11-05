@@ -50,7 +50,7 @@
     <T.Mesh >
       <T is={$blank.nodes['Scene']} />
     </T.Mesh>
-    <T.Mesh geometry={pattern} material={mat2} />
-    <T.Mesh geometry={title} material={mat2} />
+    <T.Mesh geometry={pattern} material={mat2} name="groves-A"/>
+    <T.Mesh geometry={title} material={mat2} name="title-A" />
   </T.Group>
 {/if}
