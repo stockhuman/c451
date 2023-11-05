@@ -35,7 +35,6 @@ export function generateTrack(record: RecordSide) {
   if (record.type === 'original') {
     for (let i = 0; i < record.data.length; i++) {
       const interval = record.data[i]
-      console.log(interval)
       for (let t = 0; t < interval.length; t++) {
         if (interval[t] === '0') continue
         const notch = new BoxGeometry(0.1, 0.2, 0.1)
