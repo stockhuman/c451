@@ -21,18 +21,17 @@
   }
   const gen = Array(75)
   for (let i = 0; i < gen.length; i++) {
-    let a = Array(22).fill('1')
-    a.map((_, s) => (Math.random() > 0.5 ? (a[s] = '1') : (a[s] = '0')))
-    gen[i] = a.join('')
+    const rand = Math.floor(Math.random() * Math.pow(2, 22))
+    gen[i] = rand.toString(16).toUpperCase().padStart(6, '0')
   }
-  const trackA = { title: 'Garbanzo bob', data: gen, type: 'original', side: 'A' }
+  const trackA = { title: 'Garbanzo bobbolini frt()16723', data: gen, side: 'A' }
   // @ts-ignore
   const pattern = generateTrack(trackA)
   const title = generateTitle(trackA.title)
 
   let rotation = 0
   useFrame((_, delta) => {
-    rotation -= delta / 2
+    rotation -= delta / 6
   })
 </script>
 
@@ -47,7 +46,7 @@
 </T.PerspectiveCamera>
 {#if $blank}
   <T.Group rotation.y={rotation} position={[0, 1.5, 0]}>
-    <T.Mesh >
+    <T.Mesh>
       <T is={$blank.nodes['Scene']} />
     </T.Mesh>
     <T.Mesh geometry={pattern} material={mat2} name="groves-A"/>
