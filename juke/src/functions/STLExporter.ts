@@ -99,7 +99,7 @@ export class STLExporter {
           const b = index.getX(j + 1)
           const c = index.getX(j + 2)
 
-          this.writeFace(a, b, c, positionAttribute, object)
+          this.writeFace(a, b, c, positionAttribute, object as SkinnedMesh)
         }
       } else {
         // non-indexed geometry
@@ -108,7 +108,7 @@ export class STLExporter {
           const b = j + 1
           const c = j + 2
 
-          this.writeFace(a, b, c, positionAttribute, object)
+          this.writeFace(a, b, c, positionAttribute, object as SkinnedMesh)
         }
       }
     }
@@ -132,9 +132,9 @@ export class STLExporter {
     this.vC.fromBufferAttribute(positionAttribute, c)
 
     if (object.isSkinnedMesh) {
-      object.boneTransform(a, this.vA)
-      object.boneTransform(b, this.vB)
-      object.boneTransform(c, this.vC)
+      object.applyBoneTransform(a, this.vA)
+      object.applyBoneTransform(b, this.vB)
+      object.applyBoneTransform(c, this.vC)
     }
 
     this.vA.applyMatrix4(object.matrixWorld)
