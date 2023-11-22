@@ -11,14 +11,14 @@ export type RecordSide = {
    * Describes the toy's original 75-note limit across all groves, to ease in song composition
    * From innermost to outer, 1 representing a notch, 0 nothing
    * ex: "0100101010010010101011"
-   * 
+   *
    * Note that it is stored as a hex string, so it must be decompressed before use
    */
   data: string[]
 }
 
 export function generateTrack(record: RecordSide) {
-  const radius = 2.85 // the radius of the innermost track
+  const radius = 2.84 // the radius of the innermost track
   const notches: BufferGeometry[] = []
 
   for (let i = 0; i < record.data.length; i++) {
@@ -27,7 +27,7 @@ export function generateTrack(record: RecordSide) {
     for (let t = 0; t < 22; t++) {
       if (interval[t] === '0') continue
       const notch = new BoxGeometry(0.08, 0.2, 0.08)
-      notch.translate(radius + t * 0.1407, 0.14, 0)
+      notch.translate(radius + t * 0.1407 + (t % 2 === 0 ? 0 : 0.02), 0.14, 0)
       notch.rotateY(deg2rad((360 / 75) * i))
       notches.push(notch)
     }
@@ -49,17 +49,18 @@ export function generateTitle(title: string): BufferGeometry {
   const text: BufferGeometry[] = []
   const charRads = Math.PI / 15
   const radius = 1.45
+  const height = 0.1
 
   for (let i = 0; i < string.length; i++) {
     if (string[i] === ' ') continue
     const letter = new TextGeometry(string[i], {
       font: font,
-      size: 0.35,
+      size: 0.32,
       height: 0.1,
       curveSegments: 12,
     })
     letter.rotateZ(Math.PI - (i * charRads + 0.1))
-    letter.translate(radius * -Math.sin(i * charRads), radius * -Math.cos(i * charRads), 0.1)
+    letter.translate(radius * -Math.sin(i * charRads), radius * -Math.cos(i * charRads), height - 0.03)
 
     text.push(letter)
   }
