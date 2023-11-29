@@ -1,15 +1,23 @@
 <script>
   import { getSTL } from '../../functions/export'
   import { scene, disc } from '../../functions/store'
-  let title ='Untitled'
+  let title = 'Untitled'
+  /**
+   * @type {import("three").Object3D<import("three").Object3DEventMap> | null}
+   */
+  let model = null
   disc.subscribe((d) => {
     if (!d) return
     title = d.title
   })
+  scene.subscribe((s) => {
+    if (!s) return
+    model = s
+  })
 </script>
 
-{#if $scene}
-  <a href={getSTL($scene)} download={`disc-${title}.stl`}>Save STL</a>
+{#if model}
+  <a href={getSTL(model)} download={`disc-${title}.stl`}>Save STL</a>
 {/if}
 
 <style>
