@@ -3,21 +3,29 @@
 </script>
 
 <header>
-  <Logo />
+  <a href="/" class="logo">
+    <Logo />
+  </a>
+
   <h1>JUKE</h1>
 </header>
 
 <style>
+  .logo {
+    height: 70px;
+    width: 70px;
+    text-align: center;
+  }
   header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
+    width: 70px;
     position: absolute;
-    top: 0;
+    top: 0.5rem;
+    left: 1rem;
+    align-items: center;
   }
   h1 {
-    font-size: 3rem;
-    margin-left: 1rem;
+    text-align: center;
+    font-size: 1.6rem;
+    margin: 0;
   }
 </style>

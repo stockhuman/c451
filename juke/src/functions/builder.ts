@@ -33,6 +33,9 @@ export function generateTrack(record: RecordSide) {
     }
   }
 
+  if (record.side === 'B') {}
+  if (notches.length === 0) return null
+  
   const geometry = BufferGeometryUtils.mergeGeometries(notches)
   return geometry
 }
@@ -84,6 +87,6 @@ function deg2rad(degrees: number) {
 function decompress(data: string) {
   const binaryString = Number('0x' + data)
     .toString(2)
-    .padStart(data.length * 4, '0')
+    .padStart(22, '0')
   return binaryString
 }

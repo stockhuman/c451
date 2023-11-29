@@ -1,11 +1,12 @@
-<script>
+<script lang="ts">
   import { T, useFrame, useThrelte } from '@threlte/core'
   import { Environment, OrbitControls, useGltf } from '@threlte/extras'
   import { MeshStandardMaterial } from 'three/src/materials/MeshStandardMaterial.js'
   import blankDisc from '../../assets/blank-disc.glb'
   import envmap from '../../assets/empty_workshop_1k.hdr'
-  import { generateTitle, generateTrack } from '../../functions/builder'
-  import { scene as global } from '../../functions/store'
+  import { generateTitle, generateTrack, type RecordSide } from '../../functions/builder'
+  import { scene as global, disc } from '../../functions/store'
+  import type { BufferGeometry } from 'three'
 
   // recolor the disc
   const mat = new MeshStandardMaterial({ color: 0xad0d10, roughness: 0.5 })
@@ -19,37 +20,44 @@
     })
     global.set(scene)
   }
-  const gen = Array(75)
-  for (let i = 0; i < gen.length; i++) {
-    const rand = Math.floor(Math.random() * Math.pow(2, 22))
-    gen[i] = rand.toString(16).toUpperCase().padStart(6, '0')
-  }
-  const trackA = { title: 'Garbanzo bobbolini frt()16723', data: gen, side: 'A' }
-  // @ts-ignore
-  const pattern = generateTrack(trackA)
-  const title = generateTitle(trackA.title)
+  let track = null
+  let trackA: RecordSide, pattern: RecordSide, title: BufferGeometry
+
+  disc.subscribe(d => {
+    track = d
+    if (track) {
+      // @ts-ignore
+      pattern = generateTrack(track)
+      title = generateTitle(track.title)
+    } else {
+      trackA = { title: 'No disc loaded', data: [], side: 'A' }
+      // @ts-ignore
+      pattern = generateTrack(trackA)
+      title = generateTitle(trackA.title)
+    }
+  })
 
   let rotation = 0
   useFrame((_, delta) => {
-    rotation -= delta / 6
+    // rotation -= delta / 6
   })
 </script>
 
 <Environment files={envmap} format="hdr" />
 <T.PerspectiveCamera
   makeDefault
-  position={[10, 10, 10]}
+  position={[10, 20, 5]}
   on:create={({ ref }) => {
     ref.lookAt(0, 1, 0)
   }}>
-  <OrbitControls enableDamping />
+  <OrbitControls enableDamping enablePan={false} />
 </T.PerspectiveCamera>
 {#if $blank}
   <T.Group rotation.y={rotation} position={[0, 1.5, 0]}>
     <T.Mesh>
       <T is={$blank.nodes['Scene']} />
     </T.Mesh>
-    <T.Mesh geometry={pattern} material={mat2} name="groves-A"/>
+    {#if pattern}<T.Mesh geometry={pattern} material={mat2} name="groves-A" />{/if}
     <T.Mesh geometry={title} material={mat2} name="title-A" />
   </T.Group>
 {/if}

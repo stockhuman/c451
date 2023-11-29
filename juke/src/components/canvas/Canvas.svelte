@@ -3,15 +3,20 @@
   import Scene from './Scene.svelte'
 </script>
 
-<div aria-details="A spinning disc representation of what will be downloaded as a 3d file">
+<main aria-details="A spinning disc representation of what will be downloaded as a 3d file">
   <Canvas>
     <Scene />
   </Canvas>
-</div>
+</main>
 
 <style>
-  div {
+  main {
     height: 100vh;
     width: 100vw;
+  }
+  @media (prefers-color-scheme: dark) {
+    main {
+      background-color: #000;
+    }
   }
 </style>
