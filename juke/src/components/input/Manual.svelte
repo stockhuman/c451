@@ -1,10 +1,12 @@
 <script lang="ts">
   import type { RecordSide } from '../../functions/builder'
+  import { disc } from '../../functions/store'
 
   const notes = 17
   const length = 75
 
-  import { disc } from '../../functions/store'
+  export let side: 'A' | 'B' = 'A'
+  let title = 'Untitled'
 
   let composition = Array.from({ length: notes }, (_, i) => {
     return Array.from({ length }, (_, i) => {
@@ -17,8 +19,7 @@
     composition[n][i] = !composition[n][i]
     composition = [...composition]
     const data = pack()
-    const titleInput = document.querySelector('.title') as HTMLInputElement
-    disc.set({ side: 'A', data, title: titleInput.value || 'Untitled' })
+    disc.update(value => ({ ...value, [side.toLowerCase()]: { side, data, title } }))
   }
 
   // Generate a RecordSide track from the composition array
@@ -26,7 +27,6 @@
     // transpose the array
     let data = composition[0].map((_, colIndex) => composition.map(row => row[colIndex]))
     data = autoSpace(data)
-    console.log(data)
     // convert to hex
     const packed = data.map(row => {
       return parseInt(row.map(n => (n ? '1' : '0')).join(''), 2)
@@ -43,17 +43,19 @@
    * Finely spaced notes should then be moved to the lower groves if appropriate.
    * This function will automatically move notes to the lower groves if they are
    * spaced closely enough to the previous grove.
-   * 
+   *
    * Additionally, this component's 17 note grid is filled with zeroes where applicable,
    * so that the requisite 22 groove spaces are present in the final track.
    */
   function autoSpace(data: boolean[][]): boolean[][] {
     let last: boolean[] = new Array(22).fill(false)
     let autospaced: boolean[][] = []
-    for (let i = 0; i < length; i++) { // time sclice
+    for (let i = 0; i < length; i++) {
+      // time sclice
       let slice: boolean[] = [] // 22 notes
-      for (let n = 0; n < notes; n++) { // note
-        
+      for (let n = 0; n < notes; n++) {
+        // note
+
         if (n > 6 && n < 13) {
           // add an extra zero to the middle range
           slice.push(false)
@@ -78,10 +80,16 @@
     // return autospaced
     return autospaced
   }
+
+  function changeTitle(event: any) {
+    title = event.target.value
+    const data = pack()
+    disc.update(value => ({ ...value, [side.toLowerCase()]: { side, data, title } }))
+  }
 </script>
 
 <div>
-  <input placeholder="Title" class="title" />
+  <input placeholder="Title" class="title" on:change={changeTitle} />
   <!-- We're building a table that looks like a treble clef music sheet -->
   <div class="notes-container">
     <table>

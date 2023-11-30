@@ -32,8 +32,6 @@ export function generateTrack(record: RecordSide) {
       notches.push(notch)
     }
   }
-
-  if (record.side === 'B') {}
   if (notches.length === 0) return null
   
   const geometry = BufferGeometryUtils.mergeGeometries(notches)

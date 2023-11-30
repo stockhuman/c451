@@ -2,13 +2,14 @@
   import { getSTL } from '../../functions/export'
   import { scene, disc } from '../../functions/store'
   let title = 'Untitled'
+
   /**
    * @type {import("three").Object3D<import("three").Object3DEventMap> | null}
    */
   let model = null
   disc.subscribe((d) => {
     if (!d) return
-    title = d.title
+    title = d.meta.title
   })
   scene.subscribe((s) => {
     if (!s) return
@@ -17,7 +18,7 @@
 </script>
 
 {#if model}
-  <a href={getSTL(model)} download={`disc-${title}.stl`}>Save STL</a>
+  <a href={getSTL(model)} download={`JUKE-${title}.stl`}>Save STL</a>
 {/if}
 
 <style>

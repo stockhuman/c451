@@ -1,6 +1,10 @@
 <script lang="ts">
   export let open: boolean
   export let side: 'A' | 'B' = 'A'
+
+  import { createEventDispatcher } from 'svelte'
+
+  const dispatch = createEventDispatcher()
 </script>
 
 <aside class={open ? 'open' : ''}>
@@ -10,11 +14,11 @@
       role="button"
       tabindex="0"
       on:click={() => {
-        open = false
+        dispatch('close')
       }}
       on:keydown={event => {
         if (event.key === 'Enter' || event.key === ' ') {
-          open = false
+          dispatch('close')
         }
       }}></span>
     <h2>side {side}</h2>
@@ -30,7 +34,7 @@
     height: 100vh;
     width: 50vw;
     transform: translateX(-100%);
-    transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.5s ease-in-out;
     display: flex;
     position: fixed;
     top: 0;
