@@ -2,7 +2,7 @@ import { writable } from 'svelte/store'
 import type { Object3D } from 'three'
 import type { RecordSide } from './builder'
 
-type Record = {
+export type Disc = {
   a: RecordSide | null
   b: RecordSide | null
   meta: {
@@ -13,7 +13,7 @@ type Record = {
 }
 
 export const scene = writable<Object3D>()
-export const disc = writable<Record>({
+export const disc = writable<Disc>({
   a: null,
   b: null,
   meta: {
