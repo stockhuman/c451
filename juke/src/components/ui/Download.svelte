@@ -1,28 +1,37 @@
-<script>
+<script lang="ts">
+  import type { Object3D, Object3DEventMap, Scene } from 'three'
   import { getSTL } from '../../functions/export'
   import { scene, disc } from '../../functions/store'
-  let title = 'Untitled'
 
-  /**
-   * @type {import("three").Object3D<import("three").Object3DEventMap> | null}
-   */
-  let model = null
-  disc.subscribe((d) => {
+  let title = 'Untitled'
+  let model: Scene | null = null
+
+  disc.subscribe(d => {
     if (!d) return
     title = d.meta.title
   })
-  scene.subscribe((s) => {
+  scene.subscribe(s => {
     if (!s) return
-    model = s
+    model = s as Scene
   })
+
+  function download() {
+    const a = document.createElement('a')
+    model?.updateMatrixWorld()
+    a.href = getSTL(model as Object3D<Object3DEventMap>)
+    a.download = `JUKE-${title}.stl`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+  }
 </script>
 
 {#if model}
-  <a href={getSTL(model)} download={`JUKE-${title}.stl`}>Save STL</a>
+  <button on:click={download}>Save STL</button>
 {/if}
 
 <style>
-  a {
+  button {
     background-color: #000;
     color: #fff;
     padding: 2rem;
@@ -34,9 +43,11 @@
     font-weight: bold;
     position: absolute;
     bottom: 0;
-    right: 0;
+    left: 0;
+    border-radius: 0;
+    border: none;
   }
-  a:hover {
+  button:hover {
     background-color: #00f;
   }
 </style>
