@@ -5,24 +5,35 @@
   import Aside from './components/ui/Aside.svelte'
   import Manual from './components/input/Manual.svelte'
   import Interface from './components/ui/Interface.svelte'
+  import UploadButton from './components/ui/UploadButton.svelte'
+  import Modal from './components/ui/Modal.svelte'
 
   let side: 'A' | 'B' = 'A'
-  let open = false
+  let inputOpen = false
+  let uploadModalOpen = false
 
   function handleSideSelect(event: CustomEvent<'A' | 'B'>) {
     // Handle the sideSelect event here
     side = event.detail
-    open = true
+    inputOpen = true
+  }
+
+  function handleUploadModal() {
+    // Handle the uploadModal event here
+    uploadModalOpen = true
   }
 </script>
 
 <Canvas />
 <Header />
 <Interface on:sideSelect={handleSideSelect} />
-<Aside open={open && side === 'A'} {side} on:close={() => (open = false)}>
+<Download />
+<Aside open={inputOpen && side === 'A'} {side} on:close={() => (inputOpen = false)}>
   <Manual side="A" />
 </Aside>
-<Aside open={open && side === 'B'} {side} on:close={() => (open = false)}>
+<Aside open={inputOpen && side === 'B'} {side} on:close={() => (inputOpen = false)}>
   <Manual side="B" />
 </Aside>
-<Download />
+<UploadButton on:modal={handleUploadModal}/>
+<Modal open={uploadModalOpen} on:close={() => (uploadModalOpen = false)} />
+
