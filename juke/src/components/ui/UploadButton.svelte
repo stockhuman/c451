@@ -1,24 +1,40 @@
-<!-- <script lang="ts">
-  import MIDIEncoder from "../../functions/encoders/midi"
+<script lang="ts">
+  import { disc } from '../../functions/store'
+  import { createEventDispatcher } from 'svelte'
+  const dispatch = createEventDispatcher()
 
-  function handleFileSelect(evt: Event & { currentTarget: EventTarget & HTMLInputElement; }) {
-    const files = evt?.currentTarget?.files
-    const reader = new FileReader()
-    reader.onload = e => {
-      const midi = MIDIEncoder(e?.target?.result as ArrayBuffer)
-      // console.log('data', midi)
-    }
-    if (!files?.length) return
-    reader.readAsArrayBuffer(files[0])
+  let ds: any = null
+  disc.subscribe(s => {
+    if (!s) return
+    ds = s.a || s.b
+  })
+
+  function showModal() {
+    dispatch('modal')
   }
 </script>
 
-<input type="file" id="midi" accept="audio/midi, audio/x-midi" on:input={handleFileSelect} />
+{#if ds}
+  <span on:click={showModal} on:keydown={showModal} role="button" tabindex="0">Upload Disc</span>
+{/if}
 
 <style>
-  input {
+  span {
+    background-color: #000;
+    color: #fff;
+    padding: 2rem;
+    font-size: large;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.1rem;
+    font-weight: bold;
     position: absolute;
     bottom: 0;
     right: 0;
+    cursor: pointer;
   }
-</style> -->
+  span:hover {
+    background-color: #00f;
+  }
+</style>
