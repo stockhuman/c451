@@ -27,5 +27,6 @@
     text-align: center;
     font-size: 1.6rem;
     margin: 0;
+    color: #286bb5;
   }
 </style>

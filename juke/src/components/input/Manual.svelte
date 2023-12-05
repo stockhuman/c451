@@ -95,7 +95,6 @@
     <table>
       {#each Array.from({ length: notes - 1 }, (_, i) => i) as n}
         <tr>
-          <td>{n}</td>
           {#each Array.from({ length }, (_, i) => i) as i}
             <td
               ><input
@@ -108,6 +107,7 @@
       {/each}
     </table>
   </div>
+  <p class="description">Input notes here directly as they are placed within the disc</p>
 </div>
 
 <style>
@@ -147,6 +147,13 @@
     outline: none;
     border-left: #000 4px solid;
     border-style: solid solid solid solid;
+  }
+
+  .description {
+    font-size: 0.7rem;
+    margin: 1rem 0;
+    opacity: 0.5;
+    font-family: 'IBM Plex Mono', monospace;
   }
 
   @media (prefers-color-scheme: dark) {

@@ -58,6 +58,35 @@
         }
       }}></span>
     <h2>Upload Disc</h2>
+    <svg
+    width="150"
+    height="150"
+    viewBox="0 0 522 522"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    id="logo-svg">
+    <style>
+      circle {
+        stroke: black;
+      }
+      @media (prefers-color-scheme: dark) {
+        circle {
+          stroke: white;
+        }
+      }
+    </style>
+    <g transform="rotate(-15 239.63 239.63)">
+      <circle cx="260.843" cy="260.843" r="118" stroke="black" stroke-width="4" />
+      <circle cx="260.843" cy="260.843" r="128" stroke="black" stroke-width="4" />
+      <circle cx="260.843" cy="260.843" r="138" stroke="black" stroke-width="4" />
+      <circle cx="260.843" cy="260.843" r="148" stroke="black" stroke-width="4" />
+      <circle cx="260.843" cy="260.843" r="158" stroke="black" stroke-width="4" />
+      <circle cx="260.843" cy="260.843" r="168" stroke="black" stroke-width="4" />
+      <circle cx="260.843" cy="260.843" r="178" stroke="black" stroke-width="4" />
+      <circle cx="260.843" cy="260.843" r="188" stroke="black" stroke-width="4" />
+      <circle cx="260.843" cy="260.843" r="198" stroke="black" stroke-width="4" />
+    </g>
+  </svg>
     <div class="form">
       <p class="description">You may upload your disc for others to view.</p>
       <input type="text" bind:value={data.meta.title} placeholder="Title" />
@@ -86,7 +115,7 @@
   .container {
     height: 100vh;
     width: calc(100% - 4rem);
-    background-color: #d9d9d9;
+    background-color: #f1f1f1;
   }
   .blur {
     width: 4rem;
@@ -97,7 +126,7 @@
     font-size: 2rem;
     margin: 0;
     padding: 1rem;
-    background-color: #9b9b9b;
+    background-color: #1f5a9b;
     color: #fff;
     text-align: left;
     text-transform: uppercase;

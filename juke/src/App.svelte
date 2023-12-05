@@ -7,10 +7,13 @@
   import Interface from './components/ui/Interface.svelte'
   import UploadButton from './components/ui/UploadButton.svelte'
   import Modal from './components/ui/Modal.svelte'
+  import LibraryButton from './components/ui/LibraryButton.svelte'
+  import Library from './components/ui/Library.svelte'
 
   let side: 'A' | 'B' = 'A'
   let inputOpen = false
   let uploadModalOpen = false
+  let libraryVisible = false
 
   function handleSideSelect(event: CustomEvent<'A' | 'B'>) {
     // Handle the sideSelect event here
@@ -24,7 +27,8 @@
   }
 </script>
 
-<Canvas />
+<Library hidden={!libraryVisible}/>
+<Canvas shift={libraryVisible} />
 <Header />
 <Interface on:sideSelect={handleSideSelect} />
 <Download />
@@ -34,6 +38,9 @@
 <Aside open={inputOpen && side === 'B'} {side} on:close={() => (inputOpen = false)}>
   <Manual side="B" />
 </Aside>
-<UploadButton on:modal={handleUploadModal}/>
+<LibraryButton
+  on:openLibrary={() => {
+    libraryVisible = !libraryVisible
+  }} />
+<UploadButton on:modal={handleUploadModal} />
 <Modal open={uploadModalOpen} on:close={() => (uploadModalOpen = false)} />
-

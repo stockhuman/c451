@@ -45,7 +45,7 @@
   .container {
     height: 100vh;
     width: calc(100% - 4rem);
-    background-color: #d9d9d9;
+    background-color: #f1f1f1;
   }
   .blur {
     width: 4rem;
@@ -56,7 +56,7 @@
     font-size: 2rem;
     margin: 0;
     padding: 1rem;
-    background-color: #9b9b9b;
+    background-color: #1f5a9b;
     color: #fff;
     text-align: right;
     text-transform: uppercase;
@@ -72,7 +72,7 @@
     left: 1rem;
     width: 2rem;
     height: 2rem;
-    border: 4px solid var(--border-color);
+    border: 4px solid #fff;
     border-radius: 50%;
     cursor: pointer;
   }
@@ -84,7 +84,7 @@
     left: 50%;
     width: 50%;
     height: 4px;
-    background-color: var(--border-color);
+    background-color: #fff;
     transform: translate(-50%, -50%) rotate(45deg);
   }
 
