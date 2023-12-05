@@ -89,7 +89,7 @@
 </script>
 
 <div>
-  <input placeholder="Title" class="title" on:change={changeTitle} />
+  <input placeholder="Title" class="title" on:change={changeTitle} maxlength="30"/>
   <!-- We're building a table that looks like a treble clef music sheet -->
   <div class="notes-container">
     <table>
