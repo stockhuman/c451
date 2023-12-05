@@ -35,7 +35,7 @@
 </div>
 <div class="ui-side right">
   <p class="side">Side B</p>
-  <p class="title">{titleA}</p>
+  <p class="title">{titleB}</p>
   <span on:click={() => handleButtonClick('B')} on:keydown={() => {}} role="button" tabindex="0"
     >{btnB}</span>
 </div>
